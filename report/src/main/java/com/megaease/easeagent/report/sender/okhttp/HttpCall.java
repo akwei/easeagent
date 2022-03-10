@@ -19,12 +19,14 @@ package com.megaease.easeagent.report.sender.okhttp;
 
 import com.megaease.easeagent.plugin.report.Call;
 import com.megaease.easeagent.plugin.report.Callback;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
 
 // from zipkin-reporter-java
+@Slf4j
 final class HttpCall implements Call<Void> {
 
     final okhttp3.Call call;
@@ -47,6 +49,7 @@ final class HttpCall implements Call<Void> {
     }
 
     static void parseResponse(Response response) throws IOException {
+        log.info("http response: {}", response);
         if (response.isSuccessful()) {
             return;
         }
